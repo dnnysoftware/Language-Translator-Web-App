@@ -5,6 +5,15 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import MicIcon from '@mui/icons-material/Mic';
 import { grey } from '@mui/material/colors';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { makeStyles } from '@mui/styles'
+
+const useStyles = makeStyles({
+    grid: {
+        direction: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
+    }
+});
 
 const languages = [
     { label: 'English'},
