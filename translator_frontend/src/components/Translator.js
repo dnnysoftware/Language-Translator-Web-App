@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { TextField, Box, Grid, Autocomplete, InputAdornment, IconButton} from '@mui/material'
 import SwapHorizontalCircleRoundedIcon from '@mui/icons-material/SwapHorizontalCircleRounded';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
@@ -10,13 +10,21 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 
 const languages = [
     { label: 'English'},
-    { label: 'French'}
+    { label: 'French'},
+    { label: 'German'},
+    { label: 'Japanese'}
 ];
 
 
-const SwapLanguage = () => {
+const SwapLanguage = ({baseLang, setBaseLang, convertedLang, setConvertedLang}) => {
+
+    const handleSwap = () => {
+        setBaseLang(convertedLang);
+        setConvertedLang(baseLang);
+    }
+
     return(
-        <IconButton>
+        <IconButton onClick={handleSwap}>
             <SwapHorizontalCircleRoundedIcon 
                 fontSize='large' 
                 alignItems='center' 
@@ -30,48 +38,62 @@ const SwapLanguage = () => {
     );
 }
 
+
 const LanguageBar = () => {
     const verySmallScreen = useMediaQuery('(max-width:649px)');
     const smallScreen = useMediaQuery('(min-width:650px) and (max-width:899px)');
     const mediumScreen = useMediaQuery('(min-width:900px) and (max-width:1200px)');
+    const [baseLang, setBaseLang] = useState(languages[0]);
+    const [convertedLang, setConvertedLang] = useState(languages[1]);
+  
     return (
-        <Box sx={{ bgcolor: '#ABE3FF', height: '10vh', border: 1, borderRadius: 2 }}>
-            <Grid
-                container
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-            >
-                <Grid item>
-                    <Autocomplete
-                        fullWidth
-                        id="combo-box-detect"
-                        options={languages}
-                        sx={{ width: verySmallScreen ? '10ch' : smallScreen ? '20ch' : mediumScreen ? '30ch' : '40ch', m: 1 }}
-                        renderInput={(params) => <TextField {...params} label="Base Language" />}
-                    />
-                </Grid>
-                <Grid item>
-                    <SwapLanguage />
-                </Grid>
-                <Grid item>
-                    <Autocomplete
-                        disablePortal
-                        id="combo-box-translate"
-                        options={languages}
-                        sx={{ 
-                            width: 
-                            verySmallScreen ? '10ch' : 
-                            smallScreen ? '20ch' : 
-                            mediumScreen ? '30ch' : '40ch', 
-                            m: 1 }}
-                        renderInput={(params) => <TextField {...params} label="Converted Language" />}
-                    />
-                </Grid>
-            </Grid>
-        </Box>
+      <Box sx={{ bgcolor: '#ABE3FF', height: '10vh', border: 1, borderRadius: 2 }}>
+        <Grid container direction="row" justifyContent="space-between" alignItems="center">
+          <Grid item>
+            <Autocomplete
+              fullWidth
+              id="combo-box-detect"
+              options={languages}
+              value={baseLang}
+              onChange={(event, newValue) => {
+                setBaseLang(newValue);
+              }}
+              sx={{ 
+                width: verySmallScreen ? '10ch' : smallScreen ? '20ch' : mediumScreen ? '30ch' : '40ch', 
+                m: 1 
+              }}
+              renderInput={(params) => <TextField {...params} label="Base Language" />}
+            />
+          </Grid>
+          <Grid item>
+            <SwapLanguage 
+              baseLang={baseLang} 
+              setBaseLang={setBaseLang} 
+              convertedLang={convertedLang} 
+              setConvertedLang={setConvertedLang} 
+            />
+          </Grid>
+          <Grid item>
+            <Autocomplete
+              disablePortal
+              id="combo-box-translate"
+              options={languages}
+              value={convertedLang}
+              onChange={(event, newValue) => {
+                setConvertedLang(newValue);
+              }}
+              sx={{ 
+                width: verySmallScreen ? '10ch' : smallScreen ? '20ch' : mediumScreen ? '30ch' : '40ch', 
+                m: 1 
+              }}
+              renderInput={(params) => <TextField {...params} label="Converted Language" />}
+            />
+          </Grid>
+        </Grid>
+      </Box>
     );
 }
+  
 
 
 class DetectBox extends React.Component {
