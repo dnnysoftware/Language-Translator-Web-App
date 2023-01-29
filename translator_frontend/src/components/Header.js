@@ -5,7 +5,7 @@ import { Typography, AppBar, Toolbar, CssBaseline, Button, Grid} from '@mui/mate
 
 
 
-const Header = () => {
+function Header() {
 
   const pages = {'Portfolio': 'https://www.google.com/', 'Github': 'https://github.com/dnnysoftware'};
 
@@ -16,7 +16,6 @@ const Header = () => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
   
   return (
       <CssBaseline>

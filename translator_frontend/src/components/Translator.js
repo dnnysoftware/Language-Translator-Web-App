@@ -7,7 +7,6 @@ import { grey } from '@mui/material/colors';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 
-
 const languages = [
     { label: 'English'},
     { label: 'French'},
@@ -16,11 +15,11 @@ const languages = [
 ];
 
 
-const SwapLanguage = ({baseLang, setBaseLang, convertedLang, setConvertedLang}) => {
+function SwapLanguage(props) {
 
     const handleSwap = () => {
-        setBaseLang(convertedLang);
-        setConvertedLang(baseLang);
+        props.setBaseLang(props.convertedLang);
+        props.setConvertedLang(props.baseLang);
     }
 
     return(
@@ -39,7 +38,7 @@ const SwapLanguage = ({baseLang, setBaseLang, convertedLang, setConvertedLang}) 
 }
 
 
-const LanguageBar = () => {
+function LanguageBar() {
     const verySmallScreen = useMediaQuery('(max-width:649px)');
     const smallScreen = useMediaQuery('(min-width:650px) and (max-width:899px)');
     const mediumScreen = useMediaQuery('(min-width:900px) and (max-width:1200px)');
@@ -59,10 +58,13 @@ const LanguageBar = () => {
                 setBaseLang(newValue);
               }}
               sx={{ 
-                width: verySmallScreen ? '10ch' : smallScreen ? '20ch' : mediumScreen ? '30ch' : '40ch', 
+                width: 
+                verySmallScreen ? '10ch' : 
+                smallScreen ? '20ch' : 
+                mediumScreen ? '30ch' : '40ch', 
                 m: 1 
               }}
-              renderInput={(params) => <TextField {...params} label="Base Language" />}
+              renderInput={(params) => <TextField {...params} />}
             />
           </Grid>
           <Grid item>
@@ -83,10 +85,12 @@ const LanguageBar = () => {
                 setConvertedLang(newValue);
               }}
               sx={{ 
-                width: verySmallScreen ? '10ch' : smallScreen ? '20ch' : mediumScreen ? '30ch' : '40ch', 
+                width: verySmallScreen ? '10ch' : 
+                smallScreen ? '20ch' : 
+                mediumScreen ? '30ch' : '40ch', 
                 m: 1 
               }}
-              renderInput={(params) => <TextField {...params} label="Converted Language" />}
+              renderInput={(params) => <TextField {...params} />}
             />
           </Grid>
         </Grid>
@@ -117,10 +121,10 @@ class DetectBox extends React.Component {
                         </IconButton>
                     </InputAdornment>,
                 }}
-                onKeyPress= {(e) => {
-                    if (e.key === 'Enter') {
-                      console.log('Enter key pressed');
-                      
+                onKeyUp= {(e) => {
+                    if (e.key) {
+                      console.log(e.target.value);
+                        
                     }
                 }}
                 /> 
@@ -131,6 +135,7 @@ class DetectBox extends React.Component {
 
 
 class TranslatedBox extends React.Component {
+
     render() {
         return (
             <Box component="form" noValidateautoComplete="off">
