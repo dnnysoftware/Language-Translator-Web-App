@@ -14,7 +14,7 @@ export const useStyles = makeStyles(() => {
       },
       langBar: {
           backgroundColor: '#ABE3FF', 
-          height: '5rem', 
+          height: '4.6rem', 
           border: '1px solid', 
           borderRadius: '6px',
           borderColor: '#000'
