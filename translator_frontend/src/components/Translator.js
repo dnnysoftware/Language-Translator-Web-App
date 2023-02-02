@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { TextField, Box, Grid, Autocomplete, InputAdornment, IconButton} from '@mui/material'
+import { useStyles } from './Styles.js';
 import SwapHorizontalCircleRoundedIcon from '@mui/icons-material/SwapHorizontalCircleRounded';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import MicIcon from '@mui/icons-material/Mic';
-import { grey } from '@mui/material/colors';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 
@@ -17,6 +17,8 @@ const languages = [
 
 function SwapLanguage(props) {
 
+    const classes = useStyles();
+
     const handleSwap = () => {
         props.setBaseLang(props.convertedLang);
         props.setConvertedLang(props.baseLang);
@@ -26,12 +28,7 @@ function SwapLanguage(props) {
         <IconButton onClick={handleSwap}>
             <SwapHorizontalCircleRoundedIcon 
                 fontSize='large' 
-                alignItems='center' 
-                sx={{ color: '#fff', 
-                border: 2, 
-                borderRadius: '50%', 
-                borderColor: '#fff', 
-                backgroundColor: '#000' }} 
+                className={classes.swap}
             />
         </IconButton>
     );
@@ -45,16 +42,18 @@ function LanguageBar() {
     const [baseLang, setBaseLang] = useState(languages[0]);
     const [convertedLang, setConvertedLang] = useState(languages[1]);
   
+    const classes = useStyles();
+
     return (
-      <Box sx={{ bgcolor: '#ABE3FF', height: '10vh', border: 1, borderRadius: 2 }}>
-        <Grid container direction="row" justifyContent="space-between" alignItems="center">
+      <Box className={classes.langBar}>
+        <Grid container direction='row' justifyContent='space-between' alignItems='center'>
           <Grid item>
             <Autocomplete
               fullWidth
               id="combo-box-detect"
               options={languages}
               value={baseLang}
-              onChange={(event, newValue) => {
+              onChange={(_, newValue) => {
                 setBaseLang(newValue);
               }}
               sx={{ 
@@ -62,7 +61,7 @@ function LanguageBar() {
                 verySmallScreen ? '10ch' : 
                 smallScreen ? '20ch' : 
                 mediumScreen ? '30ch' : '40ch', 
-                m: 1 
+                m: 1
               }}
               renderInput={(params) => <TextField {...params} />}
             />
@@ -81,7 +80,7 @@ function LanguageBar() {
               id="combo-box-translate"
               options={languages}
               value={convertedLang}
-              onChange={(event, newValue) => {
+              onChange={(_, newValue) => {
                 setConvertedLang(newValue);
               }}
               sx={{ 
@@ -99,71 +98,70 @@ function LanguageBar() {
 }
   
 
+function DetectBox() {
 
-class DetectBox extends React.Component {
+    const classes = useStyles();
 
-    render() {
-        return (
-            <Box component="form" noValidateautoComplete="off">
-                <TextField
-                id="outlined-multiline-static"
-                placeholder="Type Here"
-                multiline
-                fullWidth
-                rows={9}
-                InputProps={{
-                    endAdornment: <InputAdornment position="end" style={{position: 'absolute', bottom: 30, left: 0}}>
-                        <IconButton >
-                            <MicIcon sx={{ color: grey[900] }}/>
-                        </IconButton>
-                        <IconButton >
-                            <VolumeUpIcon sx={{ color: grey[900] }}/>
-                        </IconButton>
-                    </InputAdornment>,
-                }}
-                onKeyUp= {(e) => {
-                    if (e.key) {
-                      console.log(e.target.value);
-                        
-                    }
-                }}
-                /> 
-            </Box>      
-        );
-    }
+    return (
+        <Box component="form" >
+            <TextField
+            id="outlined-multiline-static"
+            placeholder='Type Here'
+            multiline
+            fullWidth
+            rows={9}
+            InputProps={{
+                endAdornment: <InputAdornment className={classes.iconPosition} position='end'>
+                    <IconButton >
+                        <MicIcon className={classes.iconStyle}/>
+                    </IconButton>
+                    <IconButton >
+                        <VolumeUpIcon className={classes.iconStyle}/>
+                    </IconButton>
+                </InputAdornment>,
+            }}
+            onKeyPress= {(e) => {
+                if (e.key) {
+                    console.log(e.target.value);
+                    
+                }
+            }}
+            /> 
+        </Box>      
+    );
 }
 
 
-class TranslatedBox extends React.Component {
+function TranslatedBox() {
 
-    render() {
-        return (
-            <Box component="form" noValidateautoComplete="off">
-                <TextField
-                id="outlined-multiline-static"
-                placeholder="Translation"
-                multiline
-                disabled
-                fullWidth
-                rows={9}
-                InputProps={{
-                    endAdornment: <InputAdornment position="end" style={{position: 'absolute', bottom: 30, left: 0}}>
-                        <IconButton >
-                            <VolumeUpIcon sx={{ color: grey[900] }}/>
-                        </IconButton>
-                    </InputAdornment>,
-                }}
-                />    
-            </Box>
-        );
-    }
+    const classes = useStyles();
+
+    return (
+        <Box component="form">
+            <TextField
+            id="outlined-multiline-static"
+            placeholder='Translation'
+            multiline
+            disabled
+            fullWidth
+            rows={9}
+            InputProps={{
+                endAdornment: <InputAdornment className={classes.iconPosition} position='end'>
+                    <IconButton >
+                        <VolumeUpIcon className={classes.iconStyle}/>
+                    </IconButton>
+                </InputAdornment>,
+            }}
+            />    
+        </Box>
+    );
 }
 
 
 class Translator extends React.Component {
     render() {
         return (
-            <Grid container alignItems='center' justifyContent='center' style={{minHeight: '80vh'}}>
+            <Grid container alignItems='center' justifyContent='center' minHeight='80vh'>
                 <Grid container rowSpacing={1} columnSpacing={1} maxWidth='70vw'>
                     <Grid item xs={12}>
                         <LanguageBar />
