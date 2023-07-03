@@ -31,10 +31,7 @@
 
 ![Language Translator Demo](img/translator.png)
 
-This project
-
-At Runtime: 
-* 
+This project is a web application for a language translator with translation, digital-to-audio conversion and audio-to-digital conversion capabilitites using both React and Django frameworks. You can check out my other projects in the links at the upper navigation!
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
