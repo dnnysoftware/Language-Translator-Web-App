@@ -1,5 +1,10 @@
 from pocketsphinx import LiveSpeech
 
+"""_summary_
+Audio to digital conversion class that takes in live audio to convert to text
+Returns:
+    _type_: converted text string
+"""
 class ADC:
 
   def __init__(self):

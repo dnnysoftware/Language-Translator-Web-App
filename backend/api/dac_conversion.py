@@ -3,6 +3,12 @@ from io import BytesIO
 import tempfile
 from playsound import playsound
 
+"""_summary_
+Digital to audio convertor which takes in text and converts it to audio with respect
+to a language type using gTTS
+Returns:
+    _type_: response status code
+"""
 class DAC:
 
     def __init__(self, lang_code, text):

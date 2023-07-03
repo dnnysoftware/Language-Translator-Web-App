@@ -1,7 +1,9 @@
 import { makeStyles } from '@mui/styles';
 import { grey } from '@mui/material/colors';
 
-
+/**
+ * MaterialUI styles configuration
+ */
 export const useStyles = makeStyles(() => {
     
     return {

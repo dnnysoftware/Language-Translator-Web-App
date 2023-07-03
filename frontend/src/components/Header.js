@@ -3,7 +3,11 @@ import { useState } from 'react';
 import { Typography, AppBar, Toolbar, CssBaseline, Button, Grid} from '@mui/material'
 
 
-
+/**
+ * The upper header/ navigation which contains my title, and 2 links to my personal
+ * portfolio.
+ * @returns upper navigation
+ */
 function Header() {
 
   const pages = {'Portfolio': 'http://softwarebydanielmironiuk.com/', 'Github': 'https://github.com/dnnysoftware'};

@@ -19,7 +19,12 @@ const languages = [
     'Turkish', 'Ukrainian', 'Urdu', 'Uyghur', 'Uzbek', 'Vietnamese', 'Welsh', 'Xhosa', 'Yiddish', 'Yoruba', 'Zulu'
   ];
   
-  
+
+/**
+ * Swaps the values of the language input forms and text fields when button is invoked
+ * @param {*} props the source and destination languages and text 
+ * @returns the swap button
+ */
 function SwapLanguage(props) {
 
     const classes = useStyles();
@@ -41,7 +46,11 @@ function SwapLanguage(props) {
     );
 }
 
-  
+/**
+ * The language bar which contains the source and destination language options
+ * @param {*} props the source and destination language states
+ * @returns the language choice input forms
+ */
 function LanguageBar(props) {
     const verySmallScreen = useMediaQuery('(max-width:649px)');
     const smallScreen = useMediaQuery('(min-width:650px) and (max-width:899px)');

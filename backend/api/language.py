@@ -1,5 +1,11 @@
 from googletrans import Translator, LANGCODES
 
+
+"""_summary_
+Converts languages from a source to a destination languge
+Returns:
+    _type_: the converted language text
+"""
 class Language():
 
     def __init__(self, lang_src_name, lang_dest_name):

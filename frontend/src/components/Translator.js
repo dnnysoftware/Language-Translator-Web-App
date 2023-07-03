@@ -6,7 +6,12 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import MicIcon from '@mui/icons-material/Mic';
 import axios from 'axios';
 
-
+/**
+ * The source language text field where the translation requests occur and calls upon methods
+ * of adc and dac functionalities.
+ * @param {*} props the source and destination states
+ * @returns the source language text field
+ */
 function DetectBox(props) {
     const { src, dest, srcText, setSrcText, setDestText } = props;
     const classes = useStyles();
@@ -82,7 +87,12 @@ function DetectBox(props) {
     );
 }
 
-
+/**
+ * The destination language text field where the translated text is recieved and calls upon methods
+ * of dac functionalities.
+ * @param {*} props the destination states
+ * @returns the destination language text field
+ */
 function TranslatedBox(props) {
 
     const { dest, destText } = props;
@@ -129,7 +139,10 @@ function TranslatedBox(props) {
     );
 }
 
-
+/**
+ * The translator parent function which is the main aggregator of states
+ * @returns the functional app
+ */
 function Translator() {
 
     const [src, setSrc] = useState('English');

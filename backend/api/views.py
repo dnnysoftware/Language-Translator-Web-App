@@ -8,8 +8,10 @@ from .adc_conversion import ADC
 # Create your views here.
 
 def get_routes(requests):
-    return JsonResponse('Our API', safe=False)
+    return JsonResponse('Translator API', safe=False)
 
+""" API GET request to get translated text
+"""
 def get_text_to_translate(request):
     src_lang = request.GET.get('src')
     dest_lang = request.GET.get('dest')
@@ -21,7 +23,8 @@ def get_text_to_translate(request):
 
     return JsonResponse({'translation': translated_text})
 
-
+""" API GET request that converts digital text to audio sound
+"""
 def get_audio(request):
     text = request.GET.get('text')
     language = request.GET.get('language')
@@ -34,7 +37,8 @@ def get_audio(request):
 
     return JsonResponse({'response_code': res})
 
-
+""" API GET request that takes in audio and converts it to text
+"""
 def get_text_from_audio(request):  
     adc = ADC()
     text = adc.audio_to_digital()
