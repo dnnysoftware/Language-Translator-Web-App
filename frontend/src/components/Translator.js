@@ -1,110 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { TextField, Box, Grid, Autocomplete, InputAdornment, IconButton} from '@mui/material'
+import { useState, useEffect } from 'react'
+import LanguageBar from './LanguageBar.js';
+import { TextField, Box, Grid, InputAdornment, IconButton} from '@mui/material'
 import { useStyles } from './Styles.js';
-import SwapHorizontalCircleRoundedIcon from '@mui/icons-material/SwapHorizontalCircleRounded';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import MicIcon from '@mui/icons-material/Mic';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import axios from 'axios';
 
-
-const languages = [
-    'English',
-    'French',
-    'German',
-    'Japanese'
-];
-
-
-function SwapLanguage(props) {
-
-    const classes = useStyles();
-
-    const handleSwap = () => {
-        props.setSrc(props.dest);
-        props.setDest(props.src);
-        props.setSrcText(props.destText);
-        props.setDestText(props.srcText);
-    }
-
-    return(
-        <IconButton onClick={handleSwap}>
-            <SwapHorizontalCircleRoundedIcon 
-                fontSize='large' 
-                className={classes.swap}
-            />
-        </IconButton>
-    );
-}
-
-
-function LanguageBar(props) {
-    const verySmallScreen = useMediaQuery('(max-width:649px)');
-    const smallScreen = useMediaQuery('(min-width:650px) and (max-width:899px)');
-    const mediumScreen = useMediaQuery('(min-width:900px) and (max-width:1200px)');
-
-    const {src, dest, setSrc, setDest, srcText, destText, setSrcText, setDestText} = props;
-
-  
-    const classes = useStyles();
-
-    return (
-      <Box className={classes.langBar}>
-        <Grid container direction='row' justifyContent='space-between' alignItems='center'>
-          <Grid item>
-            <Autocomplete
-              fullWidth
-              id="combo-box-detect"
-              options={languages}
-              value={src}
-              onChange={(_, newValue) => {
-                setSrc(newValue);
-              }}
-              sx={{ 
-                width: 
-                verySmallScreen ? '10ch' : 
-                smallScreen ? '20ch' : 
-                mediumScreen ? '30ch' : '40ch', 
-                m: 1
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </Grid>
-          <Grid item>
-            <SwapLanguage 
-              src={src} 
-              dest={dest} 
-              setSrc={setSrc} 
-              setDest={setDest} 
-              srcText={srcText}
-              destText={destText}
-              setSrcText={setSrcText} 
-              setDestText={setDestText}  
-            />
-          </Grid>
-          <Grid item>
-            <Autocomplete
-              disablePortal
-              id="combo-box-translate"
-              options={languages}
-              value={dest}
-              onChange={(_, newValue) => {
-                setDest(newValue);
-              }}
-              sx={{ 
-                width: verySmallScreen ? '10ch' : 
-                smallScreen ? '20ch' : 
-                mediumScreen ? '30ch' : '40ch', 
-                m: 1 
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </Grid>
-        </Grid>
-      </Box>
-    );
-}
-  
 
 function DetectBox(props) {
     const { src, dest, srcText, setSrcText, setDestText } = props;
